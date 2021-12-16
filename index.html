@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.0/socket.io.js"></script>
+</head>
+<body>
+
+<!-- arrows buttons -->
+<div class="arrows">
+    <button class="arrow-left">
+        &#10094;
+    </button>
+    <button class="arrow-right">
+        &#10095;
+    </button>
+</div>
+
+<style>
+    .arrows {
+        display: flex;
+    }
+    .arrow-left, .arrow-right {
+        font-size: 4rem;
+        width: 49vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+
+<script>
+    <!-- socket io client -->
+    //get page domain and port
+    let domain = window.location.hostname;
+    let port = window.location.port;
+    //connect to server
+    let socket = io.connect(`http://${domain}:${port}`);
+    socket.on('connect', function () {
+        console.log('connected');
+    });
+
+    // on button click emit arrow key event
+    document.addEventListener('keydown', function (e) {
+        let key = e.keyCode
+        if (key === 37 || key === 39) {
+            socket.emit('keydown', e.keyCode);
+        }
+    });
+
+    // on .arrow-left click emit left arrow key event
+    document.querySelector('.arrow-left').addEventListener('click', function () {
+        socket.emit('keydown', 37);
+    });
+
+    // on .arrow-right click emit right arrow key event
+    document.querySelector('.arrow-right').addEventListener('click', function () {
+        socket.emit('keydown', 39);
+    });
+</script>
+</body>
+</html>
