@@ -4,8 +4,8 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-app.get('/powerpoint.html', function(req, res){
-    res.sendFile(__dirname + '/index.html');
+app.get('/slides.html', function(req, res){
+    res.sendFile(__dirname + '/client.html');
 });
 
 http.listen(port, "0.0.0.0",  function(){

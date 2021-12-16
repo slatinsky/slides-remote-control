@@ -16,7 +16,7 @@ nodemon server.js
 
 Open the browser and type the following URL:
 ```
-http://localhost:15551/powerpoint.html
+http://localhost:15551/slides.html
 ```
 
 Open port 15551 in your firewall and set up port forwarding. Then you will be able to control your presentation remotely even outside your local network.
